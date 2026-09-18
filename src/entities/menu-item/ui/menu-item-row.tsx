@@ -33,7 +33,7 @@ export function MenuItemRow({ item, isPending, actions }: MenuItemRowProps) {
         <span
           className={
             stopped
-              ? 'inline-flex whitespace-nowrap rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent'
+              ? 'inline-flex whitespace-nowrap rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent-strong'
               : 'inline-flex whitespace-nowrap rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800'
           }
         >

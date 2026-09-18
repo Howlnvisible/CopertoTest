@@ -3,6 +3,7 @@
 @theme inline {
   --color-background: #f6f3ee;
   --color-accent: #c6462f;
+  --color-accent-strong: #a53624;
   --color-foreground: #171512;
   --font-sans:
     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
