@@ -4,13 +4,22 @@ import { useQuery } from '@tanstack/react-query';
 
 import { menuItemsQueryOptions } from '@/entities/menu-item';
 
+import { filterMenuItems } from '../model/menu-filters';
+import { useMenuFilters } from '../model/use-menu-filters';
+
+import { MenuFilters } from './menu-filters';
 import { MenuList } from './menu-list';
 import { MenuListSkeleton } from './menu-list-skeleton';
 
 export function StopListPage() {
+  const { filters, setShop, setStatus, resetFilters } = useMenuFilters();
   const { data, error, isPending, isFetching, isPaused, refetch } = useQuery(
     menuItemsQueryOptions(),
   );
+
+  const filteredItems =
+    data === undefined ? undefined : filterMenuItems(data, filters);
+  const hasFilters = filters.shop !== null || filters.status !== null;
 
   return (
     <section
@@ -23,12 +32,18 @@ export function StopListPage() {
           {isFetching && data !== undefined
             ? 'Обновляем меню…'
             : data !== undefined
-              ? `Позиций: ${data.length}`
+              ? `Позиций: ${filteredItems?.length} из ${data.length}`
               : error
                 ? 'Меню недоступно'
                 : 'Загрузка меню'}
         </span>
       </div>
+
+      <MenuFilters
+        filters={filters}
+        onShopChange={setShop}
+        onStatusChange={setStatus}
+      />
 
       {isPaused && (
         <p
@@ -67,7 +82,13 @@ export function StopListPage() {
       )}
 
       {isPending && <MenuListSkeleton />}
-      {data !== undefined && <MenuList items={data} />}
+      {filteredItems !== undefined && (
+        <MenuList
+          items={filteredItems}
+          hasFilters={hasFilters}
+          onResetFilters={resetFilters}
+        />
+      )}
     </section>
   );
 }

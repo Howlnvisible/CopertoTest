@@ -1,17 +1,19 @@
 import { MenuItemRow, type MenuItem } from '@/entities/menu-item';
 
-export function MenuList({ items }: { items: MenuItem[] }) {
+import { MenuEmptyState } from './menu-empty-state';
+
+type MenuListProps = {
+  items: MenuItem[];
+  hasFilters: boolean;
+  onResetFilters: () => void;
+};
+
+export function MenuList({ items, hasFilters, onResetFilters }: MenuListProps) {
   if (items.length === 0) {
     return (
-      <div role="status" className="px-6 py-16 text-center">
-        <h2 className="text-lg font-semibold">Позиций пока нет</h2>
-        <p className="mt-2 text-sm text-foreground/65">
-          Когда в меню появятся позиции, они отобразятся здесь.
-        </p>
-      </div>
+      <MenuEmptyState hasFilters={hasFilters} onResetFilters={onResetFilters} />
     );
   }
-
   return (
     <div
       role="region"

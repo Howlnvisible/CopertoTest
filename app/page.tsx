@@ -1,4 +1,6 @@
-import { StopListPage } from '@/_pages/stop-list';
+import { Suspense } from 'react';
+
+import { MenuListSkeleton, StopListPage } from '@/_pages/stop-list';
 
 export default function HomePage() {
   return (
@@ -14,7 +16,15 @@ export default function HomePage() {
           Позиции текущей смены, остатки и доступность для продажи.
         </p>
       </header>
-      <StopListPage />
+      <Suspense
+        fallback={
+          <div className="mt-8 overflow-hidden rounded-2xl border border-foreground/10 bg-white">
+            <MenuListSkeleton />
+          </div>
+        }
+      >
+        <StopListPage />
+      </Suspense>
     </main>
   );
 }
