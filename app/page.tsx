@@ -1,10 +1,20 @@
+import { StopListPage } from '@/_pages/stop-list';
+
 export default function HomePage() {
   return (
-    <main className="mx-auto w-full max-w-7xl px-6 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">Стоп лист кухни</h1>
-      <p className="mt-3 text-base text-foreground/70">
-        Привет стоп лист кухни!
-      </p>
+    <main className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-8">
+      <header>
+        <p className="text-xs font-semibold tracking-widest text-accent uppercase">
+          Управление меню
+        </p>
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight">
+          Стоп лист кухни
+        </h1>
+        <p className="mt-3 text-base text-foreground/65">
+          Позиции текущей смены, остатки и доступность для продажи.
+        </p>
+      </header>
+      <StopListPage />
     </main>
   );
 }
